@@ -1,0 +1,60 @@
+-- lua/plugins/lsp.lua
+return {
+  {
+    "williamboman/mason-lspconfig.nvim",
+    dependencies = {
+      "williamboman/mason.nvim",
+      "neovim/nvim-lspconfig",
+    },
+    config = function()
+      require("mason-lspconfig").setup({
+        -- List of servers to auto-install
+        ensure_installed = {
+          "lua_ls",      -- Lua
+          "tsserver",    -- JavaScript/TypeScript
+          "html",        -- HTML
+          "cssls",       -- CSS
+          "intelephense", -- PHP
+          "volar",       -- Vue
+        },
+        automatic_installation = true,
+      })
+    end,
+  },
+
+  {
+    "neovim/nvim-lspconfig",
+    config = function()
+      local lspconfig = require("lspconfig")
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+      -- Setup each server
+      local servers = {
+        "lua_ls",
+        "tsserver",
+        "html",
+        "cssls",
+        "intelephense",
+        "volar",
+      }
+
+      for _, server in ipairs(servers) do
+        lspconfig[server].setup({
+          capabilities = capabilities,
+        })
+      end
+
+      -- Special config for lua_ls (so it knows about vim globals)
+      lspconfig.lua_ls.setup({
+        capabilities = capabilities,
+        settings = {
+          Lua = {
+            diagnostics = {
+              globals = { "vim" },
+            },
+          },
+        },
+      })
+    end,
+  },
+}
