@@ -15,12 +15,12 @@
 # Most of these have info in man bash
 export EDITOR=nvim
 export SUDO_EDITOR=nvim
-HISTCONTROL=ignoreboth		# useful for ignoring commands. Just put a space before a command to stop it from going to history. Also doesn't put duplicates.
-HISTSIZE=1000			# Changes the default amount of history saved
+HISTCONTROL=ignoreboth      # useful for ignoring commands. Just put a space before a command to stop it from going to history. Also doesn't put duplicates.
+HISTSIZE=1000               # Changes the default amount of history saved
 HISTFILESIZE=2000
-shopt -s histappend		# append stuff to the terminal history instead of overwriting. Useful when using more than 1 terminal.
-shopt -s checkwinsize		# updates the size of command output based on window size
-LS_COLORS=$LS_COLORS:'di=38;5;200:' ; export LS_COLORS
+shopt -s histappend         # append stuff to the terminal history instead of overwriting. Useful when using more than 1 terminal.
+shopt -s checkwinsize       # updates the size of command output based on window size
+export TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
 
 
 
@@ -64,12 +64,67 @@ xterm*|rxvt*)
     PS1="\[\e]0;\u@\h: \w\a\]$PS1"
     ;;
 esac
-
+BACK='\e[48;5;'
+FRONT=';38;5;'
+LASTFRONT='\e[0;38;5;'
+WHITE='15'
+RED='196'
+CYAN='45'
+BLUE='17'
+YELLOW='226'
+GREEN='22'
+PINKISH='225'
+M='m'
 build_prompt() {
+
+    OS='\e[48;5;15;38;5;45m 󰣇 \e[48;5;226;38;5;15m'
+    USR="$BACK$YELLOW$FRONT$BLUE$M  ${USER:0:4} $BACK$GREEN$FRONT$YELLOW$M"
+    CWD_NO_GIT="$BACK$GREEN$FRONT$PINKISH$M   \w \e[0;38;5;22m"
+    RESET='\e[m'
+
+    PS1="$OS$USR"
+
+    # Source git-prompt.sh
+    if [ -f /usr/share/git/completion/git-prompt.sh ]; then
+        . /usr/share/git/completion/git-prompt.sh
+
+        # Enable git branch name
+        GIT_PS1_SHOWDIRTYSTATE=1
+        GIT_PS1_SHOWUNTRACKEDFILES=1
+        GIT_PS1_SHOWSTASHSTATE=1
+        GIT_PS1_SHOWUPSTREAM="auto"
+
+
+        CWD='\e[48;5;22;38;5;225m   \w \e[48;5;45;38;5;22m'
+        GIT_STRING=$(__git_ps1 "%s")
+        GIT_TING='\e[48;5;45;38;5;17m  $GIT_STRING \e[0;38;5;45m'
+
+        if [[ -n "$GIT_STRING" ]]; then
+            PS1+="$CWD$GIT_TING$RESET "
+        else
+            PS1+="$CWD_NO_GIT$RESET "
+        fi
+
+    else
+        echo 'something is wrong with the git stuff'
+
+        PS1+="$CWD_NO_GIT$RESET "
+
+    fi
+
+
+    # PS1="${debian_chroot:+($debian_chroot)}$OS$USER$CWD$GIT_TING \e[m"
+    # here just in case I goof up
+    # PS1='${debian_chroot:+($debian_chroot)}\[\e[01;32m\]\u@\h\[\e[00m\]:\[\e[01;34m\]\w\[\e[00m\]\$ '
+}
+
+
+
+build_prompt_old() {
 
     OS='\e[48;5;196;38;5;15m 󰣇 \e[48;5;226;38;5;196m'
     USR="\e[2;48;5;226;38;5;17m  ${USER:0:4} \e[22;48;5;22;38;5;226m"
-    CWD_NO_GIT='\e[2;48;5;22;38;5;225m   \W \e[0;38;5;22m'
+    CWD_NO_GIT='\e[2;48;5;22;38;5;225m   \w \e[0;38;5;22m'
     RESET='\e[m'
 
     PS1="$OS$USR"
@@ -116,6 +171,7 @@ fi
 alias ls='lsd --color=auto'
 alias ll='lsd -alF'
 alias la='lsd -A'
+LS_COLORS=$LS_COLORS:'di=38;5;200:' ; export LS_COLORS
 alias grep='grep --color=auto'
 alias updatenow="yau -Syu && flatpak update"
 alias discordfix="sudo ~/bin/my_bash_scripts/discordfix"
@@ -149,5 +205,6 @@ eval "$(atuin init bash)"
 
 # ----------------------------------------------------------------------------------------------------------------------------------- #
 ### Wakey wakey terminal
-neofetch
-
+if [[ -z "$TMUX" ]] && [[ $SHLVL -eq 1 ]]; then
+    fastfetch
+fi
