@@ -11,10 +11,10 @@ newkey('n', '<Esc>', '<cmd>nohlsearch<CR>', opts)
 newkey('i', '<C-E>', '<Esc>', opts)
 newkey('n', '<F5>', ':!xdg-open %<CR>', opts)
 
--- Keybinds to make splits easier.
-newkey('n', '<leader>sv', '<C-w>v', opts)         -- split window vertically
-newkey('n', '<leader>sh', '<C-w>s', opts)         -- split window horizontally
-newkey('n', '<leader>s=', '<C-w>=', opts)         -- split opened windows equally
+-- Keybinds to make splits easier. Currently UNUSED
+--[[ newkey('n', '<leader>v', '<C-w>v', opts)         -- split window vertically
+newkey('n', '<leader>h', '<C-w>s', opts)         -- split window horizontally
+newkey('n', '<leader>=', '<C-w>=', opts)         -- split opened windows equally ]]
 
 --  Use Alt+<hjkl> to switch between windows
 --  See `:help wincmd` for a list of all window commands
@@ -27,13 +27,16 @@ newkey('n', '<A-k>', ':TmuxNavigateUp<CR>', opts)
 newkey('n', '<leader>bn', ':bn<CR>', opts)
 newkey('n', '<leader>bp', ':bp<CR>', opts)
 newkey('n', '<leader>bx', ':bd<CR>', opts)
-newkey('n', '<leader>bd', ':bd', opts)
+newkey('n', '<leader>bd', ':BufferLinePickClose<CR>', opts)
+newkey('n', '<leader>bcc', ':BufferLineCloseOthers<CR>')
+newkey('n', '<leader>bcl', ':BufferLineCloseLeft<CR>')
+newkey('n', '<leader>bcr', ':BufferLineCloseRight<CR>')
 
 -- save 'n quit
 newkey('n', '<leader>q', ':qa!<CR>', opts)
-newkey('n', '<leader>w', ':wqa<CR>', opts)
+newkey('n', '<leader>W', ':wqa<CR>', opts)
 newkey('n', '<leader>x', ':close<CR>', opts)
-newkey('n', '<leader>ss', ':w<CR>', opts)
+newkey('n', '<leader>w', ':w<CR>', opts)
 
 
 -- Unused shortcuts -------------------------------------------------------------------------------
@@ -66,7 +69,7 @@ newkey('n', '<leader>tn', ':tabn<CR>', opts)      -- go to next tab
 -- `<C-w>d` shows diagnostic at cursor in a floating window. CTRL-W_d-default
 
 -- Keybinds for :h vim.lsp.buf
-newkey('n', '<leader>ca', vim.lsp.buf.code_action, opts)
+-- newkey('n', '<leader>ca', vim.lsp.buf.code_action, opts) REPLACED IN pretty_lsp_diagnostics.lua
 newkey('n', '<leader>r', vim.lsp.buf.references, opts)
 newkey('n', '<leader>d', vim.lsp.buf.definition, opts)
 newkey('n', '<leader>t', vim.lsp.buf.type_definition, opts)
