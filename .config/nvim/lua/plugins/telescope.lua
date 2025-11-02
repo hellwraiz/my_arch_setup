@@ -1,8 +1,8 @@
 return {
     {
         'nvim-telescope/telescope.nvim',
-        dependencies = { 'nvim-lua/plenary.nvim' },
-        branch = '0.1.x',
+        dependencies = { 'nvim-lua/plenary.nvim', 'BurntSushi/ripgrep', 'sharkdp/fd' },
+        branch = 'master',
         cmd = "Telescope",
         keys = {
             { "<leader>ff", "<cmd>Telescope fd<cr>", desc = "Find files" },
@@ -21,9 +21,11 @@ return {
                 }):find()
             end, desc = "Find directories" },
             { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
-            { "<leader>ft", "<cmd>Telescope help_tags<cr>", desc = "Help tags" },
-            { "<leader>fs", "<cmd>Telescope live_grep<cr>", desc = "Live grep" },
-            { "<leader>fc", "<cmd>Telescope grep_string<cr>", desc = "Grep string" },
+            { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help tags" },
+            { "<leader>fk", "<cmd>Telescope live_grep<cr>", desc = "Search all keybinds" },
+            { "<leader>fc", "<cmd>Telescope commands<cr>", desc = "Search all commands" },
+            { "<leader>fg", "<cmd>Telescope keymaps<cr>", desc = "Live grep" },
+            { "<leader>fs", "<cmd>Telescope grep_string<cr>", desc = "Grep using string under cursor" },
         },
         config = function()
             local telescope = require('telescope')
