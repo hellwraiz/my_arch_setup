@@ -3,7 +3,6 @@
 
 -- Stuff that needs to happen at the start --------------------------------------------------------
 
-
 -- Set <space> as the leader key
 -- See `:help mapleader`
 -- NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
@@ -12,6 +11,7 @@ vim.g.maplocalleader = ' '
 
 require ("lazyConfig") -- import lazy config file
 require ("config.keymaps") -- import all my keymaps
+
 
 
 -- Setting up the variables -----------------------------------------------------------------------
@@ -36,6 +36,7 @@ vim.opt.list = true             -- Sets neovim to show trailing white spaces, ta
 vim.opt.listchars = {           -- Sets how neovim will display certain whitespace characters in the editor.
 tab = '» ', trail = '·', nbsp = '␣' }
 
+
 -- Changes to typing
 vim.opt.scrolloff = 5          -- so that your cursor doesn't get too close to the window border before moving it
 -- vim.opt.cursorline = true    -- shows the current position of the cursor
@@ -56,15 +57,13 @@ vim.opt.shiftwidth = 4          -- How many spaces to use for autoindent and << 
 vim.opt.softtabstop = 4         -- How many stpaces that a <Tab> counts for while editing. Helps with mixing tabs and spaces
 vim.opt.breakindent = true      -- Makes warped lines visually indented
 
--- Colours 'n shiet
+-- Setting the colourscheme and some transparency settings
+vim.cmd([[set fillchars=eob:\ ]]) -- set global fillchars so EOB (end-of-buffer) is just a space (hides ~)
+vim.o.background = 'dark' -- or "light" for light mode
+vim.cmd.colorscheme('gruvbox')
 vim.opt.termguicolors = true
-vim.cmd.colorscheme('monokai_pro')
-vim.api.nvim_set_hl(0, 'Comment', { ctermfg = 8, fg = '#989898' }) -- setting the comment colour to a different one
-vim.api.nvim_set_hl(0, 'NormalFloat', {ctermfg = 8, bg = '#000000' }) -- setting the floating popup background colour
 
--- Custom highlight group for transparent windows
-vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
-vim.api.nvim_set_hl(0, 'NormalNC', { bg = 'none' })  -- for inactive windows
+
 
 -- Functions and commands -------------------------------------------------------------------------
 
@@ -79,12 +78,11 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     end,
 })
 
--- Disable stoopid lsp highlighting
-vim.api.nvim_create_autocmd('LspAttach', {
-  callback = function(args)
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if client then
-      client.server_capabilities.semanticTokensProvider = nil
-    end
-  end
+-- so that I don't see the irritating » symbol everywhere in go files.
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "go",
+  callback = function()
+    vim.opt_local.list = false
+  end,
 })
+

@@ -19,7 +19,7 @@ return {
     },
     { "mason-org/mason.nvim", opts = {} },
     { "mason-org/mason-lspconfig.nvim",
-        opts = { ensure_installed = { "lua_ls", "gopls" } },
+        opts = { ensure_installed = { "lua_ls", "gopls", "svelte", "ts_ls", "html", "cssls", "eslint" } },
         dependencies = {
             { "mason-org/mason.nvim", opts = {} },
             "neovim/nvim-lspconfig",

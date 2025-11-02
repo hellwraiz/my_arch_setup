@@ -73,10 +73,14 @@ newkey('n', '<leader>tn', ':tabn<CR>', opts)      -- go to next tab
 newkey('n', '<leader>r', vim.lsp.buf.references, opts)
 newkey('n', '<leader>d', vim.lsp.buf.definition, opts)
 newkey('n', '<leader>t', vim.lsp.buf.type_definition, opts)
-newkey('n', '<leader>i', vim.lsp.buf.implementation, opts)
+newkey('n', '<leader>I', vim.lsp.buf.implementation, opts)
 newkey('n', '<leader>s', vim.lsp.buf.document_symbol, opts) -- to see all funcs and vars
 newkey('n', '<leader>S', vim.lsp.buf.workspace_symbol, opts) -- to see all funcs and vars
 newkey('n', '<leader>ic', vim.lsp.buf.incoming_calls, opts) -- for func calls
 newkey('n', '<leader>oc', vim.lsp.buf.outgoing_calls, opts) -- for funcs this func calls
 newkey('n', '<leader>rn', vim.lsp.buf.rename, opts)
 newkey('n', 'K', vim.lsp.buf.hover, opts)
+newkey('n', '<C-k>', vim.lsp.buf.signature_help, opts) -- better hover info
+
+
+
