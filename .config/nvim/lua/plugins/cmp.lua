@@ -31,7 +31,7 @@ return {
             ['<M-f>'] = { 'select_prev', 'fallback' },
             ['<C-b>'] = { 'scroll_documentation_up', 'fallback' },
             ['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
-            ['<C-Space>'] = { 'show', 'fallback' },
+            ['<C-c>'] = { 'show', 'fallback' },
             ['<M-e>'] = { 'hide', 'fallback' },
             ['<Tab>'] = { 'accept', 'fallback' },
         },

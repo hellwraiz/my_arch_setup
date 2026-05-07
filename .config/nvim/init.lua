@@ -10,7 +10,6 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 require ("lazyConfig") -- import lazy config file
-require ("config.keymaps") -- import all my keymaps
 
 
 
@@ -33,9 +32,9 @@ vim.opt.signcolumn = 'yes'      -- Enables sign columns that can show some statu
 vim.opt.splitright = true       -- make new split appear to the right instead of to the left
 vim.opt.splitbelow = true       -- make new split appear below instead of above
 vim.opt.list = true             -- Sets neovim to show trailing white spaces, tabs and non-breakable spaces
-vim.opt.listchars = {           -- Sets how neovim will display certain whitespace characters in the editor.
+vim.opt.listchars = {           -- Sets how neovim will display certain whitespace characters in the editor
 tab = '» ', trail = '·', nbsp = '␣' }
-
+vim.opt.foldlevel = 99
 
 -- Changes to typing
 vim.opt.scrolloff = 5          -- so that your cursor doesn't get too close to the window border before moving it
@@ -52,7 +51,7 @@ vim.opt.undofile = true
 
 -- <Tab>s 'n shiet
 vim.opt.tabstop = 4             -- How many spaces are in a tabstop
-vim.opt.expandtab = true        -- To use tab appropriately in insert mode and using < and >
+vim.opt.expandtab = true        -- Tells neovim to use spaces instead of tabs
 vim.opt.shiftwidth = 4          -- How many spaces to use for autoindent and << or >>
 vim.opt.softtabstop = 4         -- How many stpaces that a <Tab> counts for while editing. Helps with mixing tabs and spaces
 vim.opt.breakindent = true      -- Makes warped lines visually indented
@@ -62,6 +61,8 @@ vim.cmd([[set fillchars=eob:\ ]]) -- set global fillchars so EOB (end-of-buffer)
 vim.o.background = 'dark' -- or "light" for light mode
 vim.cmd.colorscheme('gruvbox')
 vim.opt.termguicolors = true
+
+vim.api.nvim_set_hl(0, "@variable.parameter.bash", { link = "Identifier" })
 
 
 
@@ -80,9 +81,9 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- so that I don't see the irritating » symbol everywhere in go files.
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "go",
-  callback = function()
-    vim.opt_local.list = false
-  end,
-})
-
+    pattern = "go",
+    callback = function()
+        vim.opt.listchars = { tab = '  ', trail = '·', nbsp = '␣' } -- Because go loves tabs so much
+        end,
+    }
+)

@@ -21,6 +21,8 @@ HISTFILESIZE=2000
 shopt -s histappend         # append stuff to the terminal history instead of overwriting. Useful when using more than 1 terminal.
 shopt -s checkwinsize       # updates the size of command output based on window size
 export TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
+export QT_QPA_PLATFORM=wayland
+export PATH="$PATH:$HOME/go/bin"
 
 
 
@@ -173,12 +175,15 @@ alias ll='lsd -alF'
 alias la='lsd -A'
 LS_COLORS=$LS_COLORS:'di=38;5;200:' ; export LS_COLORS
 alias grep='grep --color=auto'
-alias updatenow="yau -Syu && flatpak update"
+alias updatenow="sudo yay -Syu"
+alias cleannow="yay -Sc && yay -Rs $(yay -Qtdq)"
+alias updateNclean="updatenow && cleannow"
 alias discordfix="sudo ~/bin/my_bash_scripts/discordfix"
 alias discordfixmanual="sudo nvim /usr/share/discord/resources/build_info.json"
 alias gita="git add -A"
 alias gitc="git commit -m"
 alias gitp="git push origin"
+alias info='info --vi-keys'
 acp () {
     if [ "$#" -ne 2 ]; then
         echo "wrong number of arguments dummy"
@@ -192,6 +197,8 @@ alias sl="ls|rev"
 alias opendrive="~/bin/my_bash_scripts/opendrive"
 alias closedrive="~/bin/my_bash_scripts/closedrive"
 alias grep='grep --color=auto'
+alias vnc='sudo systemctl start vncserver@\:1.service'
+alias fastyay='yay -Syu --sudoloop --noconfirm'
 
 
  
@@ -208,3 +215,6 @@ eval "$(atuin init bash)"
 if [[ -z "$TMUX" ]] && [[ $SHLVL -eq 1 ]]; then
     fastfetch
 fi
+
+# Created by `pipx` on 2026-01-09 23:16:25
+export PATH="$PATH:/home/hellwraiz/.local/bin"

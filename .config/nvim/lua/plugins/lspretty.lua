@@ -12,7 +12,7 @@ return {
         "aznhe21/actions-preview.nvim",
         keys = {
             {
-                "<leader>ca",
+                "<leader>la",
                 function() require("actions-preview").code_actions() end,
                 mode = { "n", "v" },
                 desc = "Code actions"
@@ -22,10 +22,10 @@ return {
     {
       "dnlhc/glance.nvim",
       keys = {
-        { "gd", "<cmd>Glance definitions<cr>", desc = "Definitions" },
-        { "gt", "<cmd>Glance type_definitions<cr>", desc = "Types" },
-        { "gr", "<cmd>Glance references<cr>", desc = "References" },
-        { "gi", "<cmd>Glance implementations<cr>", desc = "Implementations" },
+        { "<leader>lgd", "<cmd>Glance definitions<cr>", desc = "Glance Definitions" },
+        { "<leader>lgt", "<cmd>Glance type_definitions<cr>", desc = "Glance Type definitions" },
+        { "<leader>lgr", "<cmd>Glance references<cr>", desc = "Glance References" },
+        { "<leader>lgi", "<cmd>Glance implementations<cr>", desc = "Glance Implementations" },
       }
     }
 }

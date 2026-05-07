@@ -22,9 +22,9 @@ return {
             end, desc = "Find directories" },
             { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
             { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help tags" },
-            { "<leader>fk", "<cmd>Telescope live_grep<cr>", desc = "Search all keybinds" },
+            { "<leader>fk", "<cmd>Telescope keymaps<cr>", desc = "Search all keybinds" },
             { "<leader>fc", "<cmd>Telescope commands<cr>", desc = "Search all commands" },
-            { "<leader>fg", "<cmd>Telescope keymaps<cr>", desc = "Live grep" },
+            { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Live grep" },
             { "<leader>fs", "<cmd>Telescope grep_string<cr>", desc = "Grep using string under cursor" },
         },
         config = function()

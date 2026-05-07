@@ -18,19 +18,9 @@ return {
     { 'windwp/nvim-autopairs', event = "InsertEnter", opts = { check_ts = true } },
     "mg979/vim-visual-multi",
     { "windwp/nvim-ts-autotag", opts = {} },
+    { "chrisgrieser/nvim-origami", event = "VeryLazy", opts = { autoFold = { enabled = false } }, },
 
     -- colourscheme stuff
-    { "folke/tokyonight.nvim", lazy = false, priority = 1000, opts = {} },
-    { "catppuccin/nvim", name = "catppuccin", priority = 1000, opts = {} },
-    { "navarasu/onedark.nvim", priority = 1000,
-        config = function()
-            require('onedark').setup {
-                style = 'darker'
-            }
-            -- Enable theme
-            -- require('onedark').load()
-        end
-    },
     { "ellisonleao/gruvbox.nvim", priority = 1000 , config = true, opts = { transparent_mode = true }},
 
     --git stuff
