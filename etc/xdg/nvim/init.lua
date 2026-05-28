@@ -87,3 +87,18 @@ vim.api.nvim_create_autocmd("FileType", {
         end,
     }
 )
+
+vim.filetype.add({
+    pattern = {
+        ['.*/kea/.*%.conf'] = 'json',
+        ['.*/nginx/.*%.conf'] = 'nginx',
+        ['.*kea%-dhcp4%.conf'] = 'json',
+        ['.*kea%-dhcp6%.conf'] = 'json',
+        ['.*kea%-ctrl%-agent%.conf'] = 'json',
+        ['.*kea%-dhcp%-ddns%.conf'] = 'json',
+    },
+    filename = {
+        ['kea-dhcp4.conf'] = 'json',
+        ['kea-dhcp6.conf'] = 'json',
+    },
+})
