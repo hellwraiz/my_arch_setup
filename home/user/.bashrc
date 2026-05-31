@@ -20,9 +20,9 @@ HISTSIZE=1000               # Changes the default amount of history saved
 HISTFILESIZE=2000
 shopt -s histappend         # append stuff to the terminal history instead of overwriting. Useful when using more than 1 terminal.
 shopt -s checkwinsize       # updates the size of command output based on window size
-export TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
 export QT_QPA_PLATFORM=wayland
 export PATH="$PATH:$HOME/go/bin"
+export PATH="$PATH:/home/hellwraiz/.local/bin"
 
 
 
@@ -203,18 +203,16 @@ alias fastyay='yay -Syu --sudoloop --noconfirm'
 
  
 # ----------------------------------------------------------------------------------------------------------------------------------- #
-### Enabling external things
-[[ ! ${BLE_VERSION-} ]] || ble-attach
-eval "$(atuin init bash)"
-[ -x /usr/bin/lesspipe.sh ] && eval "$(SHELL=/bin/sh lesspipe.sh)"
-
-
-
-# ----------------------------------------------------------------------------------------------------------------------------------- #
 ### Wakey wakey terminal
 if [[ -z "$TMUX" ]] && [[ $SHLVL -eq 1 ]]; then
     fastfetch
 fi
 
-# Created by `pipx` on 2026-01-09 23:16:25
-export PATH="$PATH:/home/hellwraiz/.local/bin"
+
+
+# ----------------------------------------------------------------------------------------------------------------------------------- #
+### Enabling external things
+eval "$(atuin init bash)"
+[ -x /usr/bin/lesspipe.sh ] && eval "$(SHELL=/bin/sh lesspipe.sh)"
+[[ ! ${BLE_VERSION-} ]] || ble-attach
+
